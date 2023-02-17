@@ -19,14 +19,14 @@ def main(age):
     if age < 7:
         return 'Ты учишься в детском саду'
     
-    elif age >= 7 and age < 18:
+    elif age < 18:
         return 'Ты учишься в школе'
     
-    elif age >= 18 and age < 22:
+    elif age < 22:
         return 'Ты учишься в ВУЗе'
     
     else:
         return 'Ты работаешь'
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(main(age))

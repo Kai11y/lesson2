@@ -20,7 +20,7 @@ def main(num1 , num2):
     Эта функция вызывается автоматически при запуске скрипта в консоли
     В ней надо заменить pass на ваш код
     """
-    if type(num1) != str and type(num2) != str:
+    if isinstance(num1 , str) and isinstance(num2 , str) :
         return '0'
     
     elif num1 == num2:
@@ -33,7 +33,7 @@ def main(num1 , num2):
         return '3'
     
     
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(main(1 , 1))
     print(main('привет' , 'привет'))
     print(main('привет' , 'питон'))
