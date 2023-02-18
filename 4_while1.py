@@ -11,11 +11,14 @@
 
 
 def hello_user():
-    """
-    Замените pass на ваш код
-    """
-    pass
+    while True:
+        user_say = input('Как дела? ')
+        if user_say == 'Хорошо':
+            print('Поздравляю, но не от всего сердца')
+            break
+        else:
+            print('Такой ответ не подходит')
 
-    
+   
 if __name__ == "__main__":
     hello_user()
