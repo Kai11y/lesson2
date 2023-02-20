@@ -15,21 +15,12 @@
     
 """
 
-questions_and_answers = {"Как дела": "Хорошо!", "Что делаешь?": "Программирую"}
-
-
 def ask_user(answers_dict):
     while True:
         user_input = input("Задай мне вопрос: ")
-        if user_input == "Как дела":
-            print(answers_dict["Как дела"])
-            break
-        elif user_input == "Что делаешь?":
-            print(answers_dict["Что делаешь?"])
-            break
-        else:
-            print("Я не знаю ответ на этот вопрос")
-
+        program_answers = answers_dict.get(user_input, 'Я не знаю ответ на этот вопрос')
+        print(program_answers)
 
 if __name__ == "__main__":
+    questions_and_answers = {"Как дела": "Хорошо!", "Что делаешь?": "Программирую"}
     ask_user(questions_and_answers)
