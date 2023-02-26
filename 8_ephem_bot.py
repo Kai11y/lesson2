@@ -13,6 +13,8 @@
 
 """
 import logging
+import ephem
+import datetime
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -21,33 +23,43 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     filename='bot.log')
 
 
-PROXY = {
-    'proxy_url': 'socks5://t1.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {
-        'username': 'learn',
-        'password': 'python'
-    }
-}
-
-
 def greet_user(update, context):
     text = 'Вызван /start'
     print(text)
     update.message.reply_text(text)
 
-
-def talk_to_me(update, context):
-    user_text = update.message.text
-    print(user_text)
-    update.message.reply_text(text)
+ 
+def planet_user(update, context):
+    now = datetime.datetime.now()
+    text = update.message.text.split(' ')
+    planet = text[-1].lower()
+    if planet == 'mars':
+        planet_name = ephem.Mars(now)
+    elif planet == 'uranus':
+        planet_name = ephem.Uranus(now)
+    elif planet == 'mercury':
+        planet_name = ephem.Mercury(now)
+    elif planet == 'venus':
+        planet_name = ephem.Venus(now)
+    elif planet == 'jupiter':
+        planet_name = ephem.Jupiter(now)
+    elif planet == 'saturn':
+        planet_name = ephem.Saturn(now)
+    elif planet == 'neptune':
+        planet_name = ephem.Neptune(now)
+    elif planet == 'pluto':
+        planet_name = ephem.Pluto(now)
+    constellation = ephem.constellation(planet_name)
+    const = constellation[-1]
+    update.message.reply_text(const)
 
 
 def main():
-    mybot = Updater("КЛЮЧ, КОТОРЫЙ НАМ ВЫДАЛ BotFather", request_kwargs=PROXY, use_context=True)
+    mybot = Updater('TOKEN', use_context=True)
 
     dp = mybot.dispatcher
-    dp.add_handler(CommandHandler("start", greet_user))
-    dp.add_handler(MessageHandler(Filters.text, talk_to_me))
+    dp.add_handler(CommandHandler('start', greet_user)) 
+    dp.add_handler(CommandHandler('planet', planet_user))
 
     mybot.start_polling()
     mybot.idle()
