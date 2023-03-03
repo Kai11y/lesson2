@@ -49,8 +49,13 @@ def planet_user(update, context):
         planet_name = ephem.Neptune(now)
     elif planet == 'pluto':
         planet_name = ephem.Pluto(now)
-    constellation = ephem.constellation(planet_name)
-    const = constellation[-1]
+    else:
+        planet_name = ''
+    if planet_name != '':
+        constellation = ephem.constellation(planet_name)
+        const = constellation[-1]
+    else:
+        const = 'Я не знаю такой планеты'
     update.message.reply_text(const)
 
 
